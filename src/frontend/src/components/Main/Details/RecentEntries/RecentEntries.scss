@@ -1,0 +1,46 @@
+.recentEntries {
+  position: relative;
+  display: grid;
+  min-height: 500px;
+  background: var(--white);
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 0;
+
+    h2 {
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    .btn {
+      position: relative;
+      padding: 5px 10px;
+      background: var(--blue);
+      text-decoration: none;
+      color: var(--white);
+      border-radius: 6px;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+
+    thead td {
+      font-weight: 600;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .recentEntries {
+    overflow-x: auto;
+  }
+}
