@@ -29,22 +29,18 @@ const RecentEntries = () => {
             <table>
                 <thead>
                 <tr>
-                    <td>ID</td>
-                    <td>ФИО</td>
+                    <td>Фамилия Имя</td>
                     <td>К оплате</td>
                     <td>Статус</td>
-                    <td>Статус оплаты</td>
                 </tr>
                 </thead>
                 {users.slice(0,10).map((user) => (
                     <RecentEntriesItem
                         key={user.id}
-                        id={user.id}
                         name={user.name}
                         lastname={user.lastname}
                         payable={user.payable}
                         curedStatus={user.curedStatus}
-                        paymentStatus={user.paymentStatus}
                     />
                 ))}
             </table>

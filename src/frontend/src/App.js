@@ -9,10 +9,9 @@ function App() {
     const [activeComponent, setActiveComponent] = useState('main')
     const [isDropDownMenu, setIsDropDownMenu] = useState(true)
 
-    function handleMouseClickToggle(event) {
+    function handleMouseClickToggle() {
         setIsToggle(!isToggle);
     }
-
     function handleMouseClickDropDown() {
         setIsDropDownMenu(!isDropDownMenu);
     }

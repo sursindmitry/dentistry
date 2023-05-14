@@ -1,0 +1,29 @@
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px;
+
+  h2 {
+    font-weight: 600;
+    color: var(--blue);
+  }
+
+  .btn {
+    position: relative;
+    padding: 5px 10px;
+    background: var(--blue);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead td {
+    font-weight: 600;
+  }
+}

@@ -1,4 +1,4 @@
-.users{
+.users {
   position: absolute;
   width: calc(100% - 300px);
   left: 300px;
@@ -7,7 +7,27 @@
   transition: 0.5s;
 }
 
-.users.active{
+.users.active {
   width: calc(100% - 80px);
   left: 80px;
+}
+
+@media (max-width: 991px) {
+  .users {
+    width: 100%;
+    left: 0;
+  }
+  .users.active {
+    left: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .users {
+    width: 100%;
+    left: 0;
+  }
+  .users.active {
+    left: 0;
+  }
 }
