@@ -13,3 +13,8 @@ const checkStatus = response => {
 export const getAllUsers = () =>
     fetch("api/v1/users")
         .then(checkStatus);
+
+export const deleteUser = userId=>
+    fetch(`api/v1/users/${userId}`, {
+        method:'DELETE'
+    }).then(checkStatus)

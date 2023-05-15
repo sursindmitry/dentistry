@@ -32,4 +32,10 @@ public class UserController {
         User persistedUser = service.addUser(mapper.toEntity(userDto));
         return mapper.toDto(persistedUser);
     }
+
+    @DeleteMapping(path = "{userId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void deleteUser(@PathVariable("userId") Long userId){
+        service.deleteUser(userId);
+    }
 }

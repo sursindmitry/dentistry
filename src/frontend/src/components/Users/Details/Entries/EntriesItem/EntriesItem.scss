@@ -11,6 +11,14 @@ tr {
       font-weight: 500;
       line-height: 1.2rem;
     }
+
+    a:hover {
+      ion-icon {
+        cursor: pointer;
+        color: red;
+      }
+
+    }
   }
 
   .status.cured {
@@ -43,6 +51,7 @@ tr {
   td:nth-child(5) {
     text-align: center;
   }
+
   td:nth-child(6) {
     text-align: center;
   }
