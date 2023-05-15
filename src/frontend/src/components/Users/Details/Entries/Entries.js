@@ -2,14 +2,17 @@ import "./Entries.scss"
 import EntriesItem from "./EntriesItem/EntriesItem";
 import {useEffect, useState} from "react";
 import {getAllUsers} from "../../../../client";
+import {NotificationContainer} from "react-notifications";
 
 const Entries =()=>{
     const [users, setUsers] = useState([]);
+    const [isDeleteUser, setIsDeleteUser]=useState(false)
 
     const fetchUsers = () => {
         getAllUsers()
             .then(res => res.json())
             .then(data => {
+                setIsDeleteUser(false)
                 setUsers(data)
             }).catch(err => {
             console.log(err)
@@ -18,11 +21,12 @@ const Entries =()=>{
 
     useEffect(() => {
         fetchUsers();
-    }, [])
-
+    }, [isDeleteUser])
+console.log(isDeleteUser)
 
     return(
         <div className="entries">
+            <NotificationContainer/>
             <div className="cardHeader">
                 <h2>Последние записи</h2>
                 <a href="#" className="btn">Добавить пользователя</a>
@@ -47,6 +51,7 @@ const Entries =()=>{
                                  payable={user.payable}
                                  curedStatus={user.curedStatus}
                                  paymentStatus={user.paymentStatus}
+                                 setIsDeleteUser={setIsDeleteUser}
                     />
                 ))}
             </table>

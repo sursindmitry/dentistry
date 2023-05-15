@@ -11,7 +11,7 @@
     </changeSet>
 
     <changeSet id="create_users_table" author="SursinDV">
-        <createTable tableName="users" schemaName="public">
+        <createTable tableName="users" schemaName="users">
             <column name="user_id" type="bigserial">
                 <constraints primaryKey="true"/>
             </column>

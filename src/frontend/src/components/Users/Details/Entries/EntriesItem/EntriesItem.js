@@ -1,14 +1,16 @@
 import './EntriesItem.scss'
 import {deleteUser} from "../../../../../client";
+import {NotificationManager} from "react-notifications";
 
-const EntriesItem = ({id, name, lastname, curedStatus, payable, paymentStatus}) => {
+const EntriesItem = ({id, name, lastname, curedStatus, payable, paymentStatus, setIsDeleteUser}) => {
     const removeUser = (userId) => {
         deleteUser(userId).then(() => {
-            console.log("Пользователь удалён")
+            setIsDeleteUser(true)
+            NotificationManager.info("Пользователь удалён")
         }).catch(err => {
             err.response.json().then(res => {
-                console.log("Ошибка: " + res.message + " " + res.status + " " + res.error
-                )
+                setIsDeleteUser(true)
+                NotificationManager.error("Ошибка", `[${res.message}] [${res.status}] [${res.error}]`)
             })
         })
     }
@@ -24,7 +26,7 @@ const EntriesItem = ({id, name, lastname, curedStatus, payable, paymentStatus}) 
             </td>
             <td><h4>{paymentStatus === "PAID" ? "Оплачено" : "Не олачено"}</h4></td>
             <td>
-                <a onClick={()=>removeUser(id)}>
+                <a onClick={() => removeUser(id)}>
                     <ion-icon name="trash-outline" size="large"></ion-icon>
                 </a>
                 <a>
