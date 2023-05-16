@@ -13,8 +13,21 @@ const checkStatus = response => {
 export const getAllUsers = () =>
     fetch("api/v1/users")
         .then(checkStatus);
-
-export const deleteUser = userId=>
+export const addNewUser = user =>
+    fetch("api/v1/users", {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(user)
+        }
+    );
+export const deleteUser = userId =>
     fetch(`api/v1/users/${userId}`, {
-        method:'DELETE'
+        method: 'DELETE'
+    }).then(checkStatus)
+
+export const editUser = userId =>
+    fetch(`api/v1/users/${userId}`, {
+        method: 'GET'
     }).then(checkStatus)

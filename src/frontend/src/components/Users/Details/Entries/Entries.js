@@ -3,10 +3,12 @@ import EntriesItem from "./EntriesItem/EntriesItem";
 import {useEffect, useState} from "react";
 import {getAllUsers} from "../../../../client";
 import {NotificationContainer} from "react-notifications";
+import UserDrawerForm from "./UserDrawerForm/UserDrawerForm";
 
 const Entries =()=>{
     const [users, setUsers] = useState([]);
     const [isDeleteUser, setIsDeleteUser]=useState(false)
+    const [showDrawer, setShowDrawer]=useState(false)
 
     const fetchUsers = () => {
         getAllUsers()
@@ -22,14 +24,18 @@ const Entries =()=>{
     useEffect(() => {
         fetchUsers();
     }, [isDeleteUser])
-console.log(isDeleteUser)
 
     return(
         <div className="entries">
+            <UserDrawerForm
+                showDrawer={showDrawer}
+                setShowDrawer={setShowDrawer}
+                fetchUsers={fetchUsers}
+            />
             <NotificationContainer/>
             <div className="cardHeader">
                 <h2>Последние записи</h2>
-                <a href="#" className="btn">Добавить пользователя</a>
+                <a onClick={()=>setShowDrawer(!showDrawer)} className="btn">Добавить пациента</a>
             </div>
             <table>
                 <thead>
@@ -52,6 +58,7 @@ console.log(isDeleteUser)
                                  curedStatus={user.curedStatus}
                                  paymentStatus={user.paymentStatus}
                                  setIsDeleteUser={setIsDeleteUser}
+                                 setShowDrawer={setShowDrawer}
                     />
                 ))}
             </table>

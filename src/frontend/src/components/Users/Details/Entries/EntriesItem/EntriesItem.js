@@ -1,8 +1,8 @@
 import './EntriesItem.scss'
-import {deleteUser} from "../../../../../client";
+import {deleteUser, editUser} from "../../../../../client";
 import {NotificationManager} from "react-notifications";
 
-const EntriesItem = ({id, name, lastname, curedStatus, payable, paymentStatus, setIsDeleteUser}) => {
+const EntriesItem = ({id, name, lastname, curedStatus, payable, paymentStatus, setIsDeleteUser, setShowDrawer}) => {
     const removeUser = (userId) => {
         deleteUser(userId).then(() => {
             setIsDeleteUser(true)
@@ -15,6 +15,16 @@ const EntriesItem = ({id, name, lastname, curedStatus, payable, paymentStatus, s
         })
     }
 
+    const changeUser = (userId) => {
+        editUser(userId).then(() => {
+            setShowDrawer(true)
+            NotificationManager.info("Пользователь отредактирован")
+        }).catch(err => {
+            err.response.json().then(res => {
+                NotificationManager.error("Ошибка", `[${res.message}] [${res.status}] [${res.error}]`)
+            })
+        })
+    }
     return (
         <tbody>
         <tr>
@@ -29,11 +39,8 @@ const EntriesItem = ({id, name, lastname, curedStatus, payable, paymentStatus, s
                 <a onClick={() => removeUser(id)}>
                     <ion-icon name="trash-outline" size="large"></ion-icon>
                 </a>
-                <a>
+                <a onClick={()=>changeUser(id)}>
                     <ion-icon name="create-outline" size="large"></ion-icon>
-                </a>
-                <a>
-                    <ion-icon name="eye-outline" size="large"></ion-icon>
                 </a>
             </td>
         </tr>
