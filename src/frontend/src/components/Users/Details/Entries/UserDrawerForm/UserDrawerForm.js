@@ -1,16 +1,21 @@
 import './UserDrawerForm.scss'
-import {useState} from "react";
-import {addNewUser} from "../../../../../client";
+import {useEffect, useState} from "react";
+import {addNewUser, editUser} from "../../../../../client";
 import {NotificationManager} from "react-notifications";
 
-const UserDrawerForm = ({showDrawer, setShowDrawer, fetchUsers}) => {
+const UserDrawerForm = ({showDrawer, setShowDrawer, fetchUsers, userData, userId, setUserId}) => {
     const onClose = () => setShowDrawer(false);
+    useEffect(() => {
+        if (userData) {
+            setUser(userData);
+        }
+    }, [userData]);
     const [user, setUser] = useState({
-        name: '',
-        lastname: '',
+        name: ' ',
+        lastname: ' ',
         payable: 0,
-        curedStatus: '',
-        paymentStatus: ''
+        curedStatus: ' ',
+        paymentStatus: ' '
     });
 
     const handleInputChange = (event) => {
@@ -21,12 +26,11 @@ const UserDrawerForm = ({showDrawer, setShowDrawer, fetchUsers}) => {
         }));
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const addUser = (user) => {
         addNewUser(user)
             .then(response => {
                 onClose();
-                if (user.curedStatus || user.paymentStatus ===' '){
+                if (user.curedStatus || user.paymentStatus === ' ') {
                     NotificationManager.info("Пользователь добавлен")
                     fetchUsers();
                     return null;
@@ -35,8 +39,29 @@ const UserDrawerForm = ({showDrawer, setShowDrawer, fetchUsers}) => {
                 fetchUsers();
             })
             .catch(err => {
-                    NotificationManager.error("Ошибка", err)
+                NotificationManager.error("Ошибка", err)
             })
+    }
+
+    const changeUser = (userId, user) => {
+        editUser(userId, user).then(() => {
+            fetchUsers();
+            setShowDrawer(false)
+            NotificationManager.info("Пользователь отредактирован")
+        }).catch(err => {
+            err.response.json().then(res => {
+                NotificationManager.error("Ошибка", `[${res.message}] [${res.status}] [${res.error}]`)
+            })
+        })
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (userId===0) {
+            addUser(user);
+        } else {
+            changeUser(userId, user);
+            setUserId(0);
+        }
     };
 
     if (!showDrawer) {
@@ -66,7 +91,7 @@ const UserDrawerForm = ({showDrawer, setShowDrawer, fetchUsers}) => {
                     <option value=" ">Выберите</option>
                     <option value="CURED">Вылечен</option>
                     <option value="UNCURED">Не вылечен</option>
-                    <option value="TREATMENT">Записан</option>
+                    <option value="TREATMENT">В процессе</option>
                 </select>
             </label>
             <br/>

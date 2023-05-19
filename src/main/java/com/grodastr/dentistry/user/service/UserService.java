@@ -12,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository repository;
+
     public List<User> getAllUsers() {
         return repository.findAll();
     }
@@ -21,9 +22,22 @@ public class UserService {
     }
 
     public void deleteUser(Long userId) {
-        if (!repository.existsById(userId)){
+        if (!repository.existsById(userId)) {
             throw new UserNotFoundException("Пользователь с ID " + userId + " не существует");
         }
         repository.deleteById(userId);
+    }
+
+    public User updateUser(User toEntity, Long userId) {
+        User updateuser = repository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("Пользователь с ID : " + userId + " не существует"));
+        updateuser.setName(toEntity.getName());
+        updateuser.setLastname(toEntity.getLastname());
+        updateuser.setPayable(toEntity.getPayable());
+        updateuser.setCuredStatus(toEntity.getCuredStatus());
+        updateuser.setPaymentStatus(toEntity.getPaymentStatus());
+
+        repository.save(updateuser);
+        return updateuser;
     }
 }

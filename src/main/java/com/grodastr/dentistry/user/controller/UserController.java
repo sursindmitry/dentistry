@@ -5,6 +5,7 @@ import com.grodastr.dentistry.user.dto.UserDto;
 import com.grodastr.dentistry.user.mapper.UserMapper;
 import com.grodastr.dentistry.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,5 +38,11 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     public void deleteUser(@PathVariable("userId") Long userId){
         service.deleteUser(userId);
+    }
+    @PutMapping(path = "{userId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public UserDto updateUser(@RequestBody UserDto usersDto, @PathVariable("userId") Long userId){
+        User persistedUsers = service.updateUser(mapper.toEntity(usersDto), userId);
+        return mapper.toDto(persistedUsers);
     }
 }

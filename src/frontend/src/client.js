@@ -27,7 +27,11 @@ export const deleteUser = userId =>
         method: 'DELETE'
     }).then(checkStatus)
 
-export const editUser = userId =>
+export const editUser = (userId, userData) =>
     fetch(`api/v1/users/${userId}`, {
-        method: 'GET'
-    }).then(checkStatus)
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    }).then(checkStatus);

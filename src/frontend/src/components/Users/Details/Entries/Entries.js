@@ -5,10 +5,13 @@ import {getAllUsers} from "../../../../client";
 import {NotificationContainer} from "react-notifications";
 import UserDrawerForm from "./UserDrawerForm/UserDrawerForm";
 
-const Entries =()=>{
+const Entries = () => {
     const [users, setUsers] = useState([]);
-    const [isDeleteUser, setIsDeleteUser]=useState(false)
-    const [showDrawer, setShowDrawer]=useState(false)
+    const [isDeleteUser, setIsDeleteUser] = useState(false)
+    const [showDrawer, setShowDrawer] = useState(false)
+
+    const [userData, setUserData] = useState([]);
+    const [userId, setUserId] = useState(0);
 
     const fetchUsers = () => {
         getAllUsers()
@@ -23,19 +26,22 @@ const Entries =()=>{
 
     useEffect(() => {
         fetchUsers();
-    }, [isDeleteUser])
+    }, [isDeleteUser, userData])
 
-    return(
+    return (
         <div className="entries">
             <UserDrawerForm
                 showDrawer={showDrawer}
                 setShowDrawer={setShowDrawer}
                 fetchUsers={fetchUsers}
+                userData={userData}
+                userId={userId}
+                setUserId={setUserId}
             />
             <NotificationContainer/>
             <div className="cardHeader">
                 <h2>Последние записи</h2>
-                <a onClick={()=>setShowDrawer(!showDrawer)} className="btn">Добавить пациента</a>
+                <a onClick={() => setShowDrawer(!showDrawer)} className="btn">Добавить пациента</a>
             </div>
             <table>
                 <thead>
@@ -48,7 +54,6 @@ const Entries =()=>{
                     <td>Действия</td>
                 </tr>
                 </thead>
-
                 {users.map((user) => (
                     <EntriesItem key={user.id}
                                  id={user.id}
@@ -59,6 +64,8 @@ const Entries =()=>{
                                  paymentStatus={user.paymentStatus}
                                  setIsDeleteUser={setIsDeleteUser}
                                  setShowDrawer={setShowDrawer}
+                                 setUserData={setUserData}
+                                 setUserId={setUserId}
                     />
                 ))}
             </table>
