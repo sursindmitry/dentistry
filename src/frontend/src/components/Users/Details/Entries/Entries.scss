@@ -4,15 +4,16 @@
   .cardHeader {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    padding: 30px;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 30px;
 
     h2 {
       font-weight: 600;
       color: var(--blue);
     }
 
-    a:hover{
+    a:hover {
       cursor: pointer;
     }
 
