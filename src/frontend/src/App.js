@@ -23,6 +23,7 @@ function App() {
             handleMouseClickToggle={handleMouseClickToggle}
             handleMouseClickDropDown={handleMouseClickDropDown}
             isDropDownMenu={isDropDownMenu}
+            setActiveComponent={setActiveComponent}
         />;
     } else if (activeComponent === 'users') {
         ComponentToRender = <Users

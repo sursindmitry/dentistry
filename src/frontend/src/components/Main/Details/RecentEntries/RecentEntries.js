@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {getAllUsers} from "../../../../client";
 import RecentEntriesItem from "./RecentEntriesItem/RecentEntriesItem";
 
-const RecentEntries = () => {
+const RecentEntries = ({setActiveComponent}) => {
     const [users, setUsers] = useState([]);
 
     const fetchUsers = () => {
@@ -24,7 +24,7 @@ const RecentEntries = () => {
         <div className="recentEntries">
             <div className="cardHeader">
                 <h2>Последние записи</h2>
-                <a href="#" className="btn">Посмотреть все</a>
+                <a onClick={()=>setActiveComponent("users")} className="btn">Посмотреть все</a>
             </div>
             <table>
                 <thead>

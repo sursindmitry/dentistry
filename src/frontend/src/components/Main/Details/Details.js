@@ -2,10 +2,10 @@ import "./Details.scss"
 import RecentEntries from "./RecentEntries/RecentEntries";
 import RecentCustomers from "./RecentCustomers/RecentCustomers";
 
-const Details = () =>{
+const Details = ({setActiveComponent}) =>{
     return(
         <div className="details">
-            <RecentEntries/>
+            <RecentEntries setActiveComponent={setActiveComponent}/>
             <RecentCustomers/>
         </div>
     )

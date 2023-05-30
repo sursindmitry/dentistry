@@ -5,7 +5,7 @@ import TopBar from "../Topbar/TopBar";
 import {getAllUsers} from "../../client";
 import {useEffect, useState} from "react";
 
-const Main = ({isToggle, handleMouseClickToggle, handleMouseClickDropDown, isDropDownMenu}) => {
+const Main = ({isToggle, handleMouseClickToggle, handleMouseClickDropDown, isDropDownMenu, setActiveComponent}) => {
     const [users, setUsers] = useState([]);
     const [curedUsers, setCuredUsers] = useState(0);
     const [curedTreatment, setCuredTreatment] = useState(0);
@@ -53,7 +53,7 @@ const Main = ({isToggle, handleMouseClickToggle, handleMouseClickDropDown, isDro
                 <Card numbers={users.length} cardName="Заявок" icon="chatbubbles-outline"/>
                 <Card numbers={`$${payable}`} cardName="Выручка" icon="cash-outline"/>
             </div>
-            <Details/>
+            <Details setActiveComponent={setActiveComponent}/>
         </div>
     )
 }
