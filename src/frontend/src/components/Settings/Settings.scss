@@ -1,0 +1,33 @@
+.settings {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--white);
+  transition: 0.5s;
+}
+
+.settings.active {
+  width: calc(100% - 80px);
+  left: 80px;
+}
+
+@media (max-width: 991px) {
+  .settings {
+    width: 100%;
+    left: 0;
+  }
+  .settings.active {
+    left: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings {
+    width: 100%;
+    left: 0;
+  }
+  .settings.active {
+    left: 0;
+  }
+}

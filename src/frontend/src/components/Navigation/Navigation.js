@@ -66,7 +66,7 @@ const Navigation = ({isToggle, setActiveComponent}) => {
                     className={activeItem === 'Settings' ? 'hovered' : ''}
                     onMouseOver={handleMouseOver}
                 >
-                    <a href="#">
+                    <a onClick={()=>setActiveComponent('settings')}>
                         <span className="icon"><ion-icon name="settings-outline"></ion-icon></span>
                         <span className="title">Настройки</span>
                     </a>

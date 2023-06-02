@@ -1,48 +1,39 @@
 package com.grodastr.dentistry.user.controller;
 
-import com.grodastr.dentistry.user.dao.entity.User;
 import com.grodastr.dentistry.user.dto.UserDto;
-import com.grodastr.dentistry.user.mapper.UserMapper;
-import com.grodastr.dentistry.user.service.UserService;
+import com.grodastr.dentistry.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/users")
 public class UserController {
-    private final UserService service;
-
-    private final UserMapper mapper;
+    private final UserFacade userFacade;
 
     @GetMapping
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<UserDto> getAllUsers(){
-        return service.getAllUsers().stream()
-                .map(mapper::toDto)
-                .collect(Collectors.toList());
+    public List<UserDto> getAllUsers() {
+        return userFacade.getAllUsers();
     }
 
     @PostMapping
     @CrossOrigin(origins = "http://localhost:3000")
-    public UserDto addUser(@RequestBody UserDto userDto){
-        User persistedUser = service.addUser(mapper.toEntity(userDto));
-        return mapper.toDto(persistedUser);
+    public UserDto addUser(@RequestBody UserDto userDto) {
+        return userFacade.addUser(userDto);
     }
 
     @DeleteMapping(path = "{userId}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public void deleteUser(@PathVariable("userId") Long userId){
-        service.deleteUser(userId);
+    public void deleteUser(@PathVariable("userId") Long userId) {
+        userFacade.deleteUser(userId);
     }
+
     @PutMapping(path = "{userId}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public UserDto updateUser(@RequestBody UserDto usersDto, @PathVariable("userId") Long userId){
-        User persistedUsers = service.updateUser(mapper.toEntity(usersDto), userId);
-        return mapper.toDto(persistedUsers);
+    public UserDto updateUser(@RequestBody UserDto userDto, @PathVariable("userId") Long userId) {
+        return userFacade.updateUser(userDto, userId);
     }
 }
