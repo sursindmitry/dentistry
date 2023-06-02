@@ -1,6 +1,6 @@
 # Стажировка
 
-## Собрать самому проект
+## Собрать самим проект
 ### Создать локальную базу данных
     docker run --name dentistry -e POSTGRESQL_USERNAME=root -e POSTGRESQL_PASSWORD=root -e POSTGRESQL_DATABASE=dentistry -p 15432:5432 bitnami/postgresql:11
 
