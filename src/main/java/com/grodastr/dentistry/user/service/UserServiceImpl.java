@@ -4,7 +4,9 @@ import com.grodastr.dentistry.user.dao.UserRepository;
 import com.grodastr.dentistry.user.dao.entity.User;
 import com.grodastr.dentistry.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,7 +27,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long userId) {
-        userRepository.deleteById(userId);
+        try {
+            userRepository.deleteById(userId);
+        } catch (UserNotFoundException ex) {
+            throw new UserNotFoundException("Пользователь с ID " + userId + " не найден");
+        }
     }
 
     @Override

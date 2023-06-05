@@ -2,9 +2,12 @@ package com.grodastr.dentistry.user.facade;
 
 import com.grodastr.dentistry.user.dao.entity.User;
 import com.grodastr.dentistry.user.dto.UserDto;
+import com.grodastr.dentistry.user.exception.UserNotFoundException;
 import com.grodastr.dentistry.user.mapper.UserMapper;
 import com.grodastr.dentistry.user.service.UserServiceImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
