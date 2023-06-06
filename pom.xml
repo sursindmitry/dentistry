@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.grodastr</groupId>
     <artifactId>dentistry</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>dentistry</name>
     <description>dentistry</description>
     <properties>
@@ -230,7 +230,7 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <to>
-                                        <image>dmitrysursin/${app.image.name}:latest</image>
+                                        <image>dmitrysursin/${app.image.name}:v1.0</image>
                                     </to>
                                 </configuration>
                                 <goals>
