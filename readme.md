@@ -1,23 +1,25 @@
-# Стажировка
+# Админ панель стоматологии
+Это фулл-стак приложение для администрирования стоматологии. Приложение позволяет регистрировать пациентов, записывать на прием, вести учет услуг и платежей, а также управлять расписанием врачей.
+# Установка и запуск
 
-## Собрать самим проект
-### Создать локальную базу данных
-    docker run --name dentistry -e POSTGRESQL_USERNAME=root -e POSTGRESQL_PASSWORD=root -e POSTGRESQL_DATABASE=dentistry -p 15432:5432 bitnami/postgresql:11
+1. Установите Docker
+2. Клонируйте репозиторий на свой компьютер: git clone https://github.com/sursindmitry/dentistry.git
+2. Перейдите в папку с проектом: cd dentistry
+3. Запустите docker compose up
 
-#### Сборка фронтенд части в target:
-`build-frontend`
+# Использование
+После запуска приложение доступно по адресу http://localhost:8080
 
-#### Создание докер образа проекта
-`jib-push-to-local`
-#### Собрать два докер образа
-`docker compose up`
+# Функциональность
+Приложение предоставляет следующие функции:
+* Регистрация пациентов
+* Учет платежей
 
----
-## Без сборки проекта
-#### Загрузить проект из docker hub
-`docker pull dmitrysursin/springboot-react-fullstack`
-#### Загрузить базу данных
-`docker pull bitnami/postgresql`
-#### Собрать два докер образа
-`docker compose up`
+# Технологии
+Приложение написано на Java и JavaScript с использованием следующих технологий:
+* Java Spring
+* PostgreSQL
+* React
 
+# Контакты
+Если у вас есть вопросы или предложения, пожалуйста, свяжитесь с нами по электронной почте dmitrijsursin@gmail.com
